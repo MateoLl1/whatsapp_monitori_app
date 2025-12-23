@@ -1,7 +1,105 @@
+/* Fondo negro y texto blanco global */
 html,
 body,
 app-root {
   height: 100%;
   margin: 0;
-  padding: 0;
+  background-color: #000 !important;
+  color: #fff !important;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Angular Material containers */
+.mat-sidenav-container,
+.mat-sidenav-content,
+.mat-sidenav,
+.mat-toolbar,
+.mat-card,
+.mat-dialog-container,
+.mat-menu-panel,
+.mat-tab-body,
+.mat-tab-group,
+.mat-form-field,
+.mat-select-panel {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+/* Botones y texto */
+button,
+.mat-button,
+.mat-raised-button,
+.mat-stroked-button,
+.mat-flat-button,
+.mat-icon-button {
+  color: #fff !important;
+  background-color: transparent !important;
+  box-shadow: none;
+}
+
+/* Íconos cyan neón */
+.mat-icon {
+  color: #00e5ff !important;
+  text-shadow: 0 0 8px #00e5ff;
+}
+
+/* Títulos y texto */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+label,
+a {
+  color: #fff !important;
+}
+
+/* Inputs y selects */
+input,
+textarea,
+select {
+  background-color: #000 !important;
+  color: #fff !important;
+  border: 1px solid #00e5ff;
+}
+
+/* Scrollbars oscuros (opcional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00e5ff;
+}
+/* Sidenav con fondo oscuro y borde cyan */
+.mat-sidenav {
+  background-color: #0d0d0d !important;
+  color: #fff !important;
+  border-right: 2px solid #00e5ff;
+  /* borde neón cyan */
+  box-shadow: 0 0 10px #00e5ff;
+  /* efecto neón */
+}
+
+
+
+/* Texto de los items del menú */
+.mat-list-item,
+.mat-nav-list .mat-list-item {
+  color: #fff !important;
+  font-weight: 500;
+}
+
+/* Hover en los items del menú */
+.mat-list-item:hover {
+  background-color: #1a1a1a !important;
+  color: #00e5ff !important;
 }
