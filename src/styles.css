@@ -88,3 +88,38 @@ select {
   color: var(--color-text) !important;
   border-right: 1px solid var(--color-border-light);
 }
+
+
+/* ESTILOS DE LAS ALERTAS */
+.alert-success {
+  background-color: #4caf50 !important; /* verde */
+  color: #fff !important;
+}
+
+.alert-error {
+  background-color: #f44336 !important; /* rojo */
+  color: #fff !important;
+}
+
+.mat-mdc-snack-bar-label {
+  color: #fff !important; /* fuerza el texto blanco */
+}
+.alert-success .mdc-snackbar__surface {
+  background-color: #4caf50 !important;
+  color: #fff !important;
+}
+
+.alert-error .mdc-snackbar__surface {
+  background-color: #f44336 !important;
+  color: #fff !important;
+}
+
+.alert-success .mat-mdc-button,
+.alert-error .mat-mdc-button {
+  color: #fff !important;
+}
+
+.alert-success .mat-mdc-snack-bar-label,
+.alert-error .mat-mdc-snack-bar-label {
+  color: #fff !important;
+}

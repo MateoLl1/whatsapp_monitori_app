@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatCard, } from '@angular/material/card';
+import { MatCard } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Asesor } from '../../../../shared/interfaces/asesor.interface';
-
 import { MatDialog } from '@angular/material/dialog';
-import { AddModalContentComponent } from '../../../../shared/components/modals/add-modal-example/add-modal-example.component';
+import { CreateAsesorModalComponent } from '../../../../shared/components/modals/create-asesor-modal/create-asesor-modal.component';
+
 @Component({
   selector: 'app-asesores-page',
   standalone: true,
@@ -28,11 +28,15 @@ export class AsesoresPageComponent {
 
   readonly defaultImage = 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png';
 
-  constructor (private dialog:MatDialog){}
+  constructor(private dialog: MatDialog) {}
 
-
-
-
-
-
+  openModal() {
+    this.dialog.open(CreateAsesorModalComponent, {
+      width: '400px'
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.asesores.push(result);
+      }
+    });
+  }
 }
