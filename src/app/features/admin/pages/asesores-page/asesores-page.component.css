@@ -1,0 +1,71 @@
+.add-btn-container {
+  display: flex;
+  justify-content: flex-end; /* ✅ alinea el botón a la derecha */
+  padding: 16px 24px;        /* espacio arriba y a la derecha */
+}
+
+.add-btn-container button {
+  border-radius: 50%;        /* ✅ asegura que sea redondo */
+}
+
+.asesores-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 24px;
+}
+
+.asesor-card {
+  background-color: var(--color-bg-toolbar); /* ✅ gris más claro que el fondo */
+  color: var(--color-text);
+  border: 1px solid var(--color-border-light);
+  box-shadow: 0 0 8px var(--color-shadow-strong);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.asesor-card:hover {
+  transform: translateY(-4px);
+  background-color: var(--color-hover-light); /* ✅ efecto hover */
+}
+
+.asesor-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nombre {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.estado {
+  font-size: 14px;
+  text-transform: capitalize;
+  padding: 4px 8px;
+  border-radius: 12px;
+  min-width: 80px;
+  text-align: center;
+  color: #000; /* ✅ texto negro para contraste */
+}
+
+.estado.activo {
+  background-color: #25d36633; /* verde WhatsApp con transparencia */
+}
+
+.estado.inactivo {
+  background-color: #f15c5c33; /* rojo suave con transparencia */
+}

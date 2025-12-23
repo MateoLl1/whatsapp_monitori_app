@@ -10,8 +10,9 @@ export interface MenuItem {
 @Injectable({
   providedIn: 'root',
 })
-export class MenuService {
+export class SideMenuService {
   private readonly menuItems: MenuItem[] = [
+    { label: 'Inicio', icon: 'group', route: '/admin/dashboard' },
     { label: 'Asesores', icon: 'group', route: '/admin/asesores' },
     { label: 'Clientes', icon: 'person', route: '/admin/clientes/1' },
     { label: 'Chat', icon: 'chat', route: '/admin/chat/1' },

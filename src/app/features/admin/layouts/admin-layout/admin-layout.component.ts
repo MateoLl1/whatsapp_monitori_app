@@ -5,10 +5,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
+
 import {
   MenuItem,
-  MenuService,
-} from '../../../../shared/services/menu.service';
+  SideMenuService,
+} from '../../../../shared/services/sidemenu.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,6 +19,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     RouterModule,
+    MatCardModule,
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
@@ -29,7 +32,7 @@ import { CommonModule } from '@angular/common';
 export class AdminLayoutComponent {
   menuItems: MenuItem[];
 
-  constructor(private readonly menuService: MenuService) {
+  constructor(private readonly menuService: SideMenuService) {
     this.menuItems = this.menuService.getMenuItems();
   }
 }

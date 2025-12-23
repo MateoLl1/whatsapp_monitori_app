@@ -1,17 +1,22 @@
 :root {
-  --color-bg-dark: #121212;
-  --color-bg-black: #000;
-  --color-bg-toolbar: #1a1a1a;
-  --color-text: #fff;
-  --color-cyan: #00e5ff;
-  --color-orange: #ff9100;
-  --color-border-cyan-light: rgba(0, 229, 255, 0.25);
-  --color-border-cyan-medium: rgba(0, 229, 255, 0.35);
-  --color-border-orange-light: rgba(255, 145, 0, 0.3);
-  --color-hover-cyan-light: rgba(0, 229, 255, 0.10);
-  --color-active-cyan-light: rgba(0, 229, 255, 0.14);
-  --color-shadow-cyan: rgba(0, 229, 255, 0.18);
-  --color-shadow-cyan-strong: rgba(0, 229, 255, 0.7);
+  /* Fondos */
+  --color-bg-dark: #111b21;       /* fondo principal */
+  --color-bg-black: #0b141a;      /* fondo aún más oscuro */
+  --color-bg-toolbar: #202c33;    /* barra superior / panel lateral */
+
+  /* Texto */
+  --color-text: #e9edef;          /* texto principal */
+  --color-text-secondary: #8696a0; /* texto secundario */
+
+  /* Accentos */
+  --color-green: #25d366;         /* verde WhatsApp */
+  --color-blue: #53bdeb;          /* azul enlaces */
+  --color-red: #f15c5c;           /* rojo para estados inactivos */
+
+  /* Bordes y sombras */
+  --color-border-light: rgba(255, 255, 255, 0.1);
+  --color-hover-light: rgba(255, 255, 255, 0.05);
+  --color-shadow-strong: rgba(0, 0, 0, 0.6);
 }
 
 html,
@@ -19,9 +24,9 @@ body,
 app-root {
   height: 100%;
   margin: 0;
-  background-color: var(--color-bg-black) !important;
+  background-color: var(--color-bg-dark) !important;
   color: var(--color-text) !important;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
 .mat-sidenav-container,
@@ -35,7 +40,7 @@ app-root {
 .mat-tab-group,
 .mat-form-field,
 .mat-select-panel {
-  background-color: var(--color-bg-black) !important;
+  background-color: var(--color-bg-dark) !important;
   color: var(--color-text) !important;
 }
 
@@ -51,30 +56,19 @@ button,
 }
 
 .mat-icon {
-  color: var(--color-cyan) !important;
-  text-shadow: 0 0 8px var(--color-cyan);
+  color: var(--color-green) !important;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-div,
-label,
-a {
+h1, h2, h3, h4, h5, h6, p, span, div, label, a {
   color: var(--color-text) !important;
 }
 
 input,
 textarea,
 select {
-  background-color: var(--color-bg-black) !important;
+  background-color: var(--color-bg-toolbar) !important;
   color: var(--color-text) !important;
-  border: 1px solid var(--color-cyan);
+  border: 1px solid var(--color-border-light);
 }
 
 ::-webkit-scrollbar {
@@ -82,27 +76,15 @@ select {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-black);
+  background: var(--color-bg-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-cyan);
+  background: var(--color-green);
 }
 
 .mat-sidenav {
-  background-color: #0d0d0d !important;
-  color: var(--color-text) !important;
-  border-right: 2px solid var(--color-cyan);
-  box-shadow: 0 0 10px var(--color-cyan);
-}
-
-.mat-list-item,
-.mat-nav-list .mat-list-item {
-  color: var(--color-text) !important;
-  font-weight: 500;
-}
-
-.mat-list-item:hover {
   background-color: var(--color-bg-toolbar) !important;
-  color: var(--color-cyan) !important;
+  color: var(--color-text) !important;
+  border-right: 1px solid var(--color-border-light);
 }

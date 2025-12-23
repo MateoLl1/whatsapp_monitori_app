@@ -4,12 +4,14 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AsesoresPageComponent } from './pages/asesores-page/asesores-page.component';
 import { ClientesPageComponent } from './pages/clientes-page/clientes-page.component';
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const adminRoutes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
     children: [
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'asesores', component: AsesoresPageComponent },
       { path: 'clientes/:asesorId', component: ClientesPageComponent },
       { path: 'chat/:clienteId', component: ChatPageComponent },

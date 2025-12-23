@@ -1,4 +1,32 @@
-<div class="page-container">
-  <h2>Asesores page</h2>
+<!-- Botón para agregar nuevo asesor -->
+<div class="add-btn-container">
+  <button mat-fab color="primary" (click)="agregarAsesor()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
 
+<!-- Listado de asesores -->
+<div class="asesores-container">
+  <mat-card
+    class="asesor-card"
+    *ngFor="let asesor of asesores"
+    [routerLink]="['/asesores', asesor.id]"
+    appearance="outlined"
+  >
+    <div class="asesor-row">
+      <img
+        class="avatar"
+        [src]="asesor.imagen || defaultImage"
+        [alt]="asesor.nombre"
+      />
+      <span class="nombre">{{ asesor.nombre }}</span>
+      <span
+        class="estado"
+        [class.activo]="asesor.estado === 'activo'"
+        [class.inactivo]="asesor.estado === 'inactivo'"
+      >
+        {{ asesor.estado }}
+      </span>
+    </div>
+  </mat-card>
 </div>

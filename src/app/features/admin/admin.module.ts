@@ -8,10 +8,14 @@ import { RouterModule } from '@angular/router';
 import { adminRoutes } from './admin.routes';
 @NgModule({
   declarations: [
-    AsesoresPageComponent,
     ChatPageComponent,
     ClientesPageComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(adminRoutes)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(adminRoutes),
+    AsesoresPageComponent,
+
+  ],
 })
 export class AdminModule {}
