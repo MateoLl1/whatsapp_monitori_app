@@ -1,15 +1,29 @@
-/* Fondo negro y texto blanco global */
+:root {
+  --color-bg-dark: #121212;
+  --color-bg-black: #000;
+  --color-bg-toolbar: #1a1a1a;
+  --color-text: #fff;
+  --color-cyan: #00e5ff;
+  --color-orange: #ff9100;
+  --color-border-cyan-light: rgba(0, 229, 255, 0.25);
+  --color-border-cyan-medium: rgba(0, 229, 255, 0.35);
+  --color-border-orange-light: rgba(255, 145, 0, 0.3);
+  --color-hover-cyan-light: rgba(0, 229, 255, 0.10);
+  --color-active-cyan-light: rgba(0, 229, 255, 0.14);
+  --color-shadow-cyan: rgba(0, 229, 255, 0.18);
+  --color-shadow-cyan-strong: rgba(0, 229, 255, 0.7);
+}
+
 html,
 body,
 app-root {
   height: 100%;
   margin: 0;
-  background-color: #000 !important;
-  color: #fff !important;
+  background-color: var(--color-bg-black) !important;
+  color: var(--color-text) !important;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-/* Angular Material containers */
 .mat-sidenav-container,
 .mat-sidenav-content,
 .mat-sidenav,
@@ -21,29 +35,26 @@ app-root {
 .mat-tab-group,
 .mat-form-field,
 .mat-select-panel {
-  background-color: #000 !important;
-  color: #fff !important;
+  background-color: var(--color-bg-black) !important;
+  color: var(--color-text) !important;
 }
 
-/* Botones y texto */
 button,
 .mat-button,
 .mat-raised-button,
 .mat-stroked-button,
 .mat-flat-button,
 .mat-icon-button {
-  color: #fff !important;
+  color: var(--color-text) !important;
   background-color: transparent !important;
   box-shadow: none;
 }
 
-/* Íconos cyan neón */
 .mat-icon {
-  color: #00e5ff !important;
-  text-shadow: 0 0 8px #00e5ff;
+  color: var(--color-cyan) !important;
+  text-shadow: 0 0 8px var(--color-cyan);
 }
 
-/* Títulos y texto */
 h1,
 h2,
 h3,
@@ -55,51 +66,43 @@ span,
 div,
 label,
 a {
-  color: #fff !important;
+  color: var(--color-text) !important;
 }
 
-/* Inputs y selects */
 input,
 textarea,
 select {
-  background-color: #000 !important;
-  color: #fff !important;
-  border: 1px solid #00e5ff;
+  background-color: var(--color-bg-black) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-cyan);
 }
 
-/* Scrollbars oscuros (opcional) */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: var(--color-bg-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00e5ff;
+  background: var(--color-cyan);
 }
-/* Sidenav con fondo oscuro y borde cyan */
+
 .mat-sidenav {
   background-color: #0d0d0d !important;
-  color: #fff !important;
-  border-right: 2px solid #00e5ff;
-  /* borde neón cyan */
-  box-shadow: 0 0 10px #00e5ff;
-  /* efecto neón */
+  color: var(--color-text) !important;
+  border-right: 2px solid var(--color-cyan);
+  box-shadow: 0 0 10px var(--color-cyan);
 }
 
-
-
-/* Texto de los items del menú */
 .mat-list-item,
 .mat-nav-list .mat-list-item {
-  color: #fff !important;
+  color: var(--color-text) !important;
   font-weight: 500;
 }
 
-/* Hover en los items del menú */
 .mat-list-item:hover {
-  background-color: #1a1a1a !important;
-  color: #00e5ff !important;
+  background-color: var(--color-bg-toolbar) !important;
+  color: var(--color-cyan) !important;
 }

@@ -1,27 +1,111 @@
-
-.container-sidenav {
-  height: 100%;
+.layout-container {
+  height: 100vh;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: block;
+  background: var(--color-bg-dark);
+  color: var(--color-text);
 }
 
-mat-sidenav-content {
+.sidenav-container {
+  height: 100%;
+}
+
+.toolbar {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-bg-toolbar);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border-orange-light);
+}
+
+.menu-btn mat-icon {
+  color: var(--color-cyan);
+}
+
+.sidenav {
+  width: 280px;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text);
+  border-right: 1px solid var(--color-border-cyan-medium);
+  box-shadow: 2px 0 6px var(--color-shadow-cyan);
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
-  background-color: #f5f5f5;
-  /* opcional para evitar manchas blancas */
 }
 
-mat-sidenav {
-  width: 250px;
-  background-color: #eeeeee;
-  /* opcional para evitar contraste blanco */
+.sidenav-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border-cyan-light);
 }
 
-.main-content {
-  flex: 1;
+.sidenav-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-cyan);
+}
+
+.nav-list {
+  padding: 8px 0;
+}
+
+.nav-item-link {
+  padding: 0;
+}
+
+.nav-item-link .mat-list-item-content,
+.nav-item-link .mdc-list-item__content {
+  padding: 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  margin: 4px 8px;
+  border-radius: 6px;
+  color: var(--color-text);
+}
+
+.nav-icon {
+  color: var(--color-cyan);
+  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 0 6px var(--color-shadow-cyan-strong);
+  flex-shrink: 0;
+}
+
+.nav-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-item:hover {
+  background-color: var(--color-hover-cyan-light);
+  color: var(--color-cyan);
+}
+
+.active {
+  background-color: var(--color-active-cyan-light);
+  border-left: 3px solid var(--color-cyan);
+}
+
+.content {
+  background: var(--color-bg-dark);
+  color: var(--color-text);
+}
+
+.content-wrapper {
+  min-height: calc(100vh - 64px);
+  padding: 24px;
+  background: var(--color-bg-dark);
+  color: var(--color-text);
 }

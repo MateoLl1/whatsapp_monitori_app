@@ -1,21 +1,31 @@
-<mat-sidenav-container class="container-sidenav">
-  <!-- Sidenav -->
-  <mat-sidenav #sidenav mode="side" opened>
-    <p>Menú lateral</p>
-  </mat-sidenav>
+<div class="layout-container">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav">
+      <div class="sidenav-header">
+        <h3>Whatsapp Control</h3>
+      </div>
 
-  <!-- Contenido principal -->
-  <mat-sidenav-content>
-    <!-- Toolbar con botón -->
-    <mat-toolbar color="primary">
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>Panel de Administración</span>
-    </mat-toolbar>
+      <mat-nav-list class="nav-list">
+        <a mat-list-item *ngFor="let item of menuItems" [routerLink]="item.route" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }" class="nav-item-link">
+          <div class="nav-item">
+            <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+            <span class="nav-label">{{ item.label }}</span>
+          </div>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
 
-    <div class="main-content">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <mat-sidenav-content class="content">
+      <mat-toolbar class="toolbar">
+        <button mat-icon-button (click)="sidenav.toggle()" class="menu-btn">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Panel de Administración</span>
+      </mat-toolbar>
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
