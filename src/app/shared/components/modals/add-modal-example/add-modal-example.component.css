@@ -1,0 +1,9 @@
+.add-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 24px;
+}
+
+.add-btn-container button {
+  border-radius: 50%;
+}

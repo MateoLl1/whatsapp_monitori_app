@@ -5,6 +5,8 @@ import { MatCard, } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Asesor } from '../../../../shared/interfaces/asesor.interface';
 
+import { MatDialog } from '@angular/material/dialog';
+import { AddModalContentComponent } from '../../../../shared/components/modals/add-modal-example/add-modal-example.component';
 @Component({
   selector: 'app-asesores-page',
   standalone: true,
@@ -24,10 +26,13 @@ export class AsesoresPageComponent {
     { id: '3', nombre: 'Carlos Ruiz', imagen: '', instancia: 'Instancia C', estado: 'activo' },
   ];
 
-  defaultImage = 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png';
+  readonly defaultImage = 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png';
+
+  constructor (private dialog:MatDialog){}
 
 
-  agregarAsesor(){
 
-  }
+
+
+
 }
