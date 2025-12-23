@@ -4,9 +4,6 @@ import { AsesoresPageComponent } from './pages/asesores-page/asesores-page.compo
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { ClientesPageComponent } from './pages/clientes-page/clientes-page.component';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { adminRoutes } from './admin.routes';
 @NgModule({
@@ -15,12 +12,6 @@ import { adminRoutes } from './admin.routes';
     ChatPageComponent,
     ClientesPageComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(adminRoutes),
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-  ],
+  imports: [CommonModule, RouterModule.forChild(adminRoutes)],
 })
 export class AdminModule {}

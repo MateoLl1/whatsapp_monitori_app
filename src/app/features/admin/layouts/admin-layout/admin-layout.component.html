@@ -1,15 +1,21 @@
-<div class="admin-layout">
-  <aside class="sidebar">
-    <h3>Asesores</h3>
-  </aside>
+<mat-sidenav-container class="container-sidenav">
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav mode="side" opened>
+    <p>Menú lateral</p>
+  </mat-sidenav>
 
-  <main class="main">
-    <header class="header">
-      <h2>WhatsApp Monitor</h2>
-    </header>
+  <!-- Contenido principal -->
+  <mat-sidenav-content>
+    <!-- Toolbar con botón -->
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Panel de Administración</span>
+    </mat-toolbar>
 
-    <section class="content">
+    <div class="main-content">
       <router-outlet></router-outlet>
-    </section>
-  </main>
-</div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
