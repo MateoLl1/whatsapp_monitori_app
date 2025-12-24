@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { AsesorService } from '../../../../core/services/auth/asesor.service';
+import { AsesorService } from '../../../../core/services/asesor/asesor.service';
 import { AlertService } from '../../../services/alert.service';
 
 @Component({
