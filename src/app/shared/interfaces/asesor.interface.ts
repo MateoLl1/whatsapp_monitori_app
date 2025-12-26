@@ -1,7 +1,8 @@
 export interface Asesor {
-  id: string;
+  id: number;
   nombre: string;
-  imagen: string;
-  instancia: string;
-  estado: 'activo' | 'inactivo';
+  activo: boolean;
+  imagen?: string;
+  instancia?: string;
+  estado?: string;
 }

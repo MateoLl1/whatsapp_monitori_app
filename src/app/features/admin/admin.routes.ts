@@ -5,14 +5,16 @@ import { AsesoresPageComponent } from './pages/asesores-page/asesores-page.compo
 import { ClientesPageComponent } from './pages/clientes-page/clientes-page.component';
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AsesorDetailComponent } from './pages/asesor-detail/asesor-detail.component';
 
-export const adminRoutes: Routes = [
+export const adminRoutes:Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'asesores', component: AsesoresPageComponent },
+      { path: 'asesores/:id', component: AsesorDetailComponent },
       { path: 'clientes/:asesorId', component: ClientesPageComponent },
       { path: 'chat/:clienteId', component: ChatPageComponent },
       { path: '**', redirectTo: 'asesores', pathMatch: 'full' },

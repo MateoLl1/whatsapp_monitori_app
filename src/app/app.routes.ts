@@ -4,11 +4,8 @@ export const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () =>
-      import('./features/admin/admin.module').then((m) => m.AdminModule),
+      import('./features/admin/admin.module').then(m => m.AdminModule)
   },
-  {
-    path: '',
-    redirectTo: 'admin',
-    pathMatch: 'full',
-  },
+  { path: '**', redirectTo: 'admin/asesores', pathMatch: 'full' }
 ];
+

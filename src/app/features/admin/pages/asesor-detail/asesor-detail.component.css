@@ -1,0 +1,63 @@
+.asesor-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.info-block {
+  display: flex;
+  flex-direction: column; /* nombre arriba, estado abajo */
+}
+
+.asesor-nombre {
+  margin: 0;
+  font-size: 24px;
+}
+
+.asesor-estado {
+  margin: 4px 0 0 0;
+  font-size: 16px;
+}
+
+.spacer {
+  flex: 1 1 auto; /* empuja el bloque derecho */
+}
+
+.right-block {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* espacio entre QR y botones */
+}
+
+.asesor-qr img {
+  width: 180px; /* ajusta tamaño si quieres más grande */
+  height: 180px;
+  display: block;
+}
+
+.asesor-botones {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  border-radius: 20px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-green);
+  color: #fff;
+}
+
+.btn-warn {
+  background-color: var(--color-red);
+  color: #fff;
+}
+
+.icon-left {
+  margin-right: 6px;
+  vertical-align: middle;
+}

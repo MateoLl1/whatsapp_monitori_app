@@ -1,0 +1,32 @@
+<div class="asesor-layout" *ngIf="asesor">
+  <div class="asesor-row">
+    <!-- Bloque de nombre + estado -->
+    <div class="info-block">
+      <h2 class="asesor-nombre">{{ asesor!.nombre }}</h2>
+      <p class="asesor-estado">
+        Estado: {{ asesor!.estado || (asesor!.activo ? 'activo' : 'inactivo') }}
+      </p>
+    </div>
+
+    <!-- Spacer que empuja todo lo demás -->
+    <div class="spacer"></div>
+
+    <!-- Bloque QR + botones a la derecha -->
+    <div class="right-block">
+      <div *ngIf="qrBase64 && asesor!.estado !== 'activo'" class="asesor-qr">
+        <img [src]="qrBase64" alt="QR de conexión" />
+      </div>
+
+      <div class="asesor-botones">
+        <button *ngIf="asesor!.estado !== 'activo'" class="btn btn-primary" (click)="conectar()" [disabled]="loadingQR">
+          <mat-icon class="icon-left">qr_code</mat-icon>
+        </button>
+
+        <button *ngIf="asesor!.estado === 'activo'" class="btn btn-warn">
+          <mat-icon class="icon-left">close</mat-icon>
+          Cerrar Instancia
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,7 +33,6 @@ app-root {
 .mat-sidenav-content,
 .mat-sidenav,
 .mat-toolbar,
-.mat-card,
 .mat-dialog-container,
 .mat-menu-panel,
 .mat-tab-body,
@@ -122,4 +121,7 @@ select {
 .alert-success .mat-mdc-snack-bar-label,
 .alert-error .mat-mdc-snack-bar-label {
   color: #fff !important;
+}
+.spacer {
+  flex: 1 1 auto; /* ocupa todo el espacio disponible */
 }
