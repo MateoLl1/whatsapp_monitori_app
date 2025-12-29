@@ -1,6 +1,6 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AsesoresService } from '../../../../core/services/asesor/asesores.service';
 import { Asesor } from '../../../../shared/interfaces/asesor.interface';
 import { Conversacion } from '../../../../shared/interfaces/conversacion.interface';
@@ -35,7 +35,8 @@ export class AsesorDetailComponent implements OnInit {
     private evolutionService: EvolutionService,
     private conversacionesService: ConversacionesService,
     private mensajesService: MensajesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   abrirQRModal() {
@@ -78,7 +79,7 @@ export class AsesorDetailComponent implements OnInit {
             this.conversaciones = res.filter(
               (c: Conversacion) => c.asesor?.id === this.asesor?.id
             );
-            console.log({res});
+            console.log({ res });
           },
           error: (err) => console.error(err),
         });
@@ -86,20 +87,6 @@ export class AsesorDetailComponent implements OnInit {
       error: (err) => console.error(err),
     });
   }
-
-  cargarMensajes(conversacionId: number) {
-    this.selectedConversacion =
-    this.conversaciones.find((c) => c.id === conversacionId) || null;
-    this.mensajesService.findAll().subscribe({
-      next: (res) => {
-        this.mensajes = res.filter(
-          (m: Mensaje) => m.conversacion?.id === conversacionId
-        );
-      },
-      error: (err) => console.error(err),
-    });
-  }
-
 
 
   logout() {
@@ -111,5 +98,9 @@ export class AsesorDetailComponent implements OnInit {
       },
       error: (err) => console.error(err),
     });
+  }
+
+  irAConversacion(conv: Conversacion) {
+    this.router.navigate(['/admin/chat', conv.id]);
   }
 }
