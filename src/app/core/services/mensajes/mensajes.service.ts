@@ -5,15 +5,17 @@ import { environment } from '../../../../environments/environment';
 import { Mensaje } from '../../../shared/interfaces/mensaje.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MensajesService {
   private baseUrl = environment.apiUrl + '/mensajes';
 
   constructor(private http: HttpClient) {}
 
-  findAll(): Observable<Mensaje[]> {
-    return this.http.get<any[]>(`${this.baseUrl}`);
+  findByConversacion(conversacionId: number): Observable<Mensaje[]> {
+    return this.http.get<Mensaje[]>(
+      `${this.baseUrl}/conversacion/${conversacionId}`
+    );
   }
 
   findOne(id: number): Observable<Mensaje> {

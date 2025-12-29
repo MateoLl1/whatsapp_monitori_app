@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Mensaje } from '../../../../shared/interfaces/mensaje.interface';
 import { MensajesService } from '../../../../core/services/mensajes/mensajes.service';
 
@@ -13,18 +14,25 @@ export class ChatPageComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
 
-  constructor(private mensajesService: MensajesService) {}
+  constructor(
+    private mensajesService: MensajesService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.loadMessages();
+
+    const conversacionId = Number(this.route.snapshot.paramMap.get('clienteId'));
+    if (conversacionId) {
+      this.loadMessages(conversacionId);
+    }
   }
 
   ngAfterViewChecked(): void {
     this.scrollToBottom();
   }
 
-  private loadMessages(): void {
-    this.mensajesService.findAll().subscribe({
+  private loadMessages(conversacionId: number): void {
+    this.mensajesService.findByConversacion(conversacionId).subscribe({
       next: (res: Mensaje[]) => {
         this.mensajes = res;
       },
