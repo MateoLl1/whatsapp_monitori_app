@@ -18,26 +18,39 @@ import { AsesoresService } from '../../../../core/services/asesor/asesores.servi
     FormsModule,
   ],
   templateUrl: './create-asesor-modal.component.html',
-  styleUrl: './create-asesor-modal.component.css',
+  styleUrls: ['./create-asesor-modal.component.css'],
 })
 export class CreateAsesorModalComponent {
   nombre = '';
+  numero_whatsapp = ''; // <-- nuevo campo obligatorio
+
   constructor(
     private dialogRef: MatDialogRef<CreateAsesorModalComponent>,
     private asesorService: AsesoresService,
     private alertService: AlertService
   ) {}
+
   crear() {
-    this.asesorService.createAsesor({nombre:this.nombre,activo:true}).subscribe({
+    if (!this.nombre || !this.numero_whatsapp) {
+      this.alertService.error('Nombre y número de WhatsApp son obligatorios');
+      return;
+    }
+
+    this.asesorService.createAsesor({
+      nombre: this.nombre,
+      activo: true,
+      numero_whatsapp: this.numero_whatsapp
+    }).subscribe({
       next: (res) => {
         this.alertService.success('Asesor creado correctamente');
         this.dialogRef.close(res);
       },
-      error: (err) => {
+      error: () => {
         this.alertService.error('Error al crear el asesor');
       },
     });
   }
+
   cancelar() {
     this.dialogRef.close();
   }

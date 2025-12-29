@@ -1,0 +1,8 @@
+<div class="qr-container">
+  <img [src]="data.base64" alt="QR de conexión" />
+  <div class="qr-info">
+    <p *ngIf="data.code"><strong>Code:</strong> {{ data.code }}</p>
+    <p *ngIf="data.pairingCode"><strong>Pairing Code:</strong> {{ data.pairingCode }}</p>
+  </div>
+  <button mat-button color="primary" (click)="cerrar()">Cerrar</button>
+</div>

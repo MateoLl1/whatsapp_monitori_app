@@ -1,6 +1,9 @@
+import { Conversacion } from './conversacion.interface';
+
 export interface Mensaje {
-  id: string;
-  from: 'asesor' | 'cliente';
-  texto: string;
-  fecha: string;
+  id: number;
+  conversacion: Conversacion;
+  mensaje: string;
+  timestamp: Date;
+  fromMe: boolean;
 }

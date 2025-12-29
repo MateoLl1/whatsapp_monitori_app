@@ -1,32 +1,61 @@
 <div class="asesor-layout" *ngIf="asesor">
   <div class="asesor-row">
-    <!-- Bloque de nombre + estado -->
     <div class="info-block">
       <h2 class="asesor-nombre">{{ asesor!.nombre }}</h2>
-      <p class="asesor-estado">
-        Estado: {{ asesor!.estado || (asesor!.activo ? 'activo' : 'inactivo') }}
+      <p class="card bg-secondary text-center asesor-estado">
+        Estado: {{ asesor!.estado || (asesor!.activo ? "activo" : "inactivo") }}
       </p>
     </div>
 
-    <!-- Spacer que empuja todo lo demás -->
     <div class="spacer"></div>
 
-    <!-- Bloque QR + botones a la derecha -->
     <div class="right-block">
-      <div *ngIf="qrBase64 && asesor!.estado !== 'activo'" class="asesor-qr">
-        <img [src]="qrBase64" alt="QR de conexión" />
+      <div *ngIf="asesor!.estado !== 'activo'" class="asesor-qr">
+        <img *ngIf="qrBase64" [src]="qrBase64" alt="QR de conexión" />
+        <button
+          class="btn btn-primary"
+          (click)="abrirQRModal()"
+          [disabled]="loadingQR"
+        >
+          <mat-icon class="icon-left">qr_code</mat-icon>
+          Conectar
+        </button>
       </div>
 
-      <div class="asesor-botones">
-        <button *ngIf="asesor!.estado !== 'activo'" class="btn btn-primary" (click)="conectar()" [disabled]="loadingQR">
-          <mat-icon class="icon-left">qr_code</mat-icon>
-        </button>
-
-        <button *ngIf="asesor!.estado === 'activo'" class="btn btn-warn">
+      <div *ngIf="asesor!.estado === 'activo'" class="asesor-botones">
+        <button class="btn btn-warn" (click)="logout()">
           <mat-icon class="icon-left">close</mat-icon>
           Cerrar Instancia
         </button>
       </div>
     </div>
   </div>
+
+  <div class="conversaciones-block mt-4">
+  <hr />
+  <div *ngIf="conversaciones.length === 0" class="no-conversaciones">
+    <p>Sin conversaciones</p>
+  </div>
+
+  <div *ngIf="conversaciones.length > 0" class="conversaciones-list">
+    <div
+      *ngFor="let conv of conversaciones"
+      class="card conversacion-card mb-2"
+      (click)="cargarMensajes(conv.id)"
+    >
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <div>
+          <h6 class="mb-1">
+            <strong>{{ conv.nombre_cliente || 'Sin nombre' }}</strong>
+          </h6>
+          <small class="text-muted">Número: {{ conv.cliente_numero }}</small>
+        </div>
+        <span class="badge bg-secondary">
+          {{ conv.fin }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
