@@ -1,1 +1,10 @@
-<h2>ChatPage</h2>
+<div #chatContainer class="chat-container">
+  <div *ngFor="let msg of mensajes"
+       class="chat-message"
+       [ngClass]="{ 'from-me': msg.fromMe, 'from-them': !msg.fromMe }">
+    <div class="bubble">
+      <span class="text">{{ msg.mensaje }}</span>
+      <span class="timestamp">{{ msg.timestamp | date:'shortTime' }}</span>
+    </div>
+  </div>
+</div>

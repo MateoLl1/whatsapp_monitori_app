@@ -1,0 +1,54 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  height: 100%;
+  background-color: var(--color-bg-dark);
+}
+
+/* Mensaje base */
+.chat-message {
+  display: flex;
+  margin: 4px 0;
+}
+
+/* Mensajes enviados por el asesor (fromMe = true) */
+.chat-message.from-me {
+  justify-content: flex-end;
+}
+
+.chat-message.from-me .bubble {
+  background-color: var(--color-green);
+  color: var(--color-bg-dark);
+  border-radius: 12px 12px 0 12px;
+  max-width: 70%;
+  padding: 8px 12px;
+  position: relative;
+}
+
+/* Mensajes recibidos (fromMe = false) */
+.chat-message.from-them {
+  justify-content: flex-start;
+}
+
+.chat-message.from-them .bubble {
+  background-color: var(--color-bg-toolbar);
+  color: var(--color-text);
+  border-radius: 12px 12px 12px 0;
+  max-width: 70%;
+  padding: 8px 12px;
+  position: relative;
+}
+
+/* Texto y timestamp */
+.bubble .text {
+  display: block;
+  word-wrap: break-word;
+}
+
+.bubble .timestamp {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-left: 8px;
+  float: right;
+}
