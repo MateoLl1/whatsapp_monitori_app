@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EvolutionService {
   private baseUrl = environment.apiUrl + '/evolution';
@@ -16,7 +16,10 @@ export class EvolutionService {
   }
 
   createInstance(instanceName: string, webhookUrl: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/create`, { instanceName, webhookUrl });
+    return this.http.post(`${this.baseUrl}/create`, {
+      instanceName,
+      webhookUrl,
+    });
   }
 
   connectInstance(instanceName: string): Observable<any> {
@@ -28,10 +31,13 @@ export class EvolutionService {
   }
 
   logoutInstance(instanceName: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/logout/${instanceName}`);
+    return this.http.delete(`${this.baseUrl}/delete/${instanceName}`);
   }
 
   fetchInstances(): Observable<any> {
     return this.http.get(`${this.baseUrl}/instances`);
   }
+
+
+
 }

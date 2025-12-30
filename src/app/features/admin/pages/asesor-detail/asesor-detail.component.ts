@@ -34,7 +34,6 @@ export class AsesorDetailComponent implements OnInit {
     private asesoresService: AsesoresService,
     private evolutionService: EvolutionService,
     private conversacionesService: ConversacionesService,
-    private mensajesService: MensajesService,
     private dialog: MatDialog,
     private router: Router
   ) {}
@@ -79,7 +78,6 @@ export class AsesorDetailComponent implements OnInit {
             this.conversaciones = res.filter(
               (c: Conversacion) => c.asesor?.id === this.asesor?.id
             );
-            console.log({ res });
           },
           error: (err) => console.error(err),
         });
@@ -91,10 +89,11 @@ export class AsesorDetailComponent implements OnInit {
 
   logout() {
     if (!this.asesor) return;
-    this.evolutionService.logoutInstance(this.asesor.nombre).subscribe({
-      next: () => {
+    this.evolutionService.deleteInstance(this.asesor.nombre).subscribe({
+      next: (res) => {
         this.asesor!.estado = 'inactivo';
         this.qrBase64 = null;
+        this.router.navigate(['/asesores']);
       },
       error: (err) => console.error(err),
     });
