@@ -9,8 +9,9 @@ import { MensajesService } from '../../../../core/services/mensajes/mensajes.ser
   styleUrls: ['./chat-page.component.css'],
 })
 export class ChatPageComponent implements OnInit, AfterViewChecked {
-
   mensajes: Mensaje[] = [];
+  nuevoMensaje = '';
+  conversacionId!: number;
 
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
 
@@ -20,10 +21,9 @@ export class ChatPageComponent implements OnInit, AfterViewChecked {
   ) {}
 
   ngOnInit(): void {
-
-    const conversacionId = Number(this.route.snapshot.paramMap.get('clienteId'));
-    if (conversacionId) {
-      this.loadMessages(conversacionId);
+    this.conversacionId = Number(this.route.snapshot.paramMap.get('clienteId'));
+    if (this.conversacionId) {
+      this.loadMessages(this.conversacionId);
     }
   }
 
@@ -38,6 +38,28 @@ export class ChatPageComponent implements OnInit, AfterViewChecked {
       },
       error: (err) => {
         console.error('Error al cargar mensajes', err);
+      }
+    });
+  }
+
+  enviarMensaje(): void {
+    if (!this.nuevoMensaje.trim()) return;
+
+    const msg: Partial<Mensaje> = {
+      mensaje: this.nuevoMensaje,
+      fromMe: true,
+      fecha: new Date(),
+      conversacion: { id: this.conversacionId } as any
+    };
+
+    this.mensajesService.create(msg).subscribe({
+      next: (res) => {
+        this.mensajes.push(res);
+        this.nuevoMensaje = '';
+        this.scrollToBottom();
+      },
+      error: (err) => {
+        console.error('Error al enviar mensaje', err);
       }
     });
   }

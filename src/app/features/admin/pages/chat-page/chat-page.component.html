@@ -1,10 +1,22 @@
-<div #chatContainer class="chat-container">
-  <div *ngFor="let msg of mensajes"
-       class="chat-message"
-       [ngClass]="{ 'from-me': msg.fromMe, 'from-them': !msg.fromMe }">
-    <div class="bubble">
-      <span class="text">{{ msg.mensaje }}</span>
-      <span class="timestamp">{{ msg.timestamp | date:'shortTime' }}</span>
+<div class="chat-wrapper">
+  <div #chatContainer class="chat-container">
+    <div *ngFor="let msg of mensajes"
+         class="chat-message"
+         [ngClass]="{ 'from-me': msg.fromMe, 'from-them': !msg.fromMe }">
+      <div class="bubble">
+        <span class="text">{{ msg.mensaje }}</span>
+        <span class="timestamp">{{ msg.fecha | date:'shortTime' }}</span>
+      </div>
     </div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      type="text"
+      [(ngModel)]="nuevoMensaje"
+      placeholder="Escribe un mensaje"
+      (keyup.enter)="enviarMensaje()"
+    />
+    <button (click)="enviarMensaje()">➤</button>
   </div>
 </div>

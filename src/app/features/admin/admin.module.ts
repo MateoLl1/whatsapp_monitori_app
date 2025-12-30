@@ -6,6 +6,7 @@ import { ClientesPageComponent } from './pages/clientes-page/clientes-page.compo
 
 import { RouterModule } from '@angular/router';
 import { adminRoutes } from './admin.routes';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ChatPageComponent,
@@ -14,6 +15,7 @@ import { adminRoutes } from './admin.routes';
   imports: [
     CommonModule,
     RouterModule.forChild(adminRoutes),
+    FormsModule,
     AsesoresPageComponent,
 
   ],

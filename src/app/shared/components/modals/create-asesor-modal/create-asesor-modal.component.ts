@@ -22,7 +22,7 @@ import { AsesoresService } from '../../../../core/services/asesor/asesores.servi
 })
 export class CreateAsesorModalComponent {
   nombre = '';
-  numero_whatsapp = ''; // <-- nuevo campo obligatorio
+  numero_whatsapp = '';
 
   constructor(
     private dialogRef: MatDialogRef<CreateAsesorModalComponent>,

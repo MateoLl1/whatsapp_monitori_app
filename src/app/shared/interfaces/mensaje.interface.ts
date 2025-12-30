@@ -4,6 +4,7 @@ export interface Mensaje {
   id: number;
   conversacion: Conversacion;
   mensaje: string;
-  timestamp: Date;
+  fecha: Date;
   fromMe: boolean;
 }
+
