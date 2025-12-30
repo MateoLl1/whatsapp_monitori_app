@@ -10,7 +10,6 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { EvolutionService } from '../../../../core/services/evolution/evolution.service';
 import { ConversacionesService } from '../../../../core/services/conversaciones/conversaciones.service';
-import { MensajesService } from '../../../../core/services/mensajes/mensajes.service';
 import { QrModalComponent } from '../../../../shared/components/modals/qr-modal/qr-modal.component';
 
 @Component({
@@ -28,6 +27,7 @@ export class AsesorDetailComponent implements OnInit {
   conversaciones: Conversacion[] = [];
   mensajes: Mensaje[] = [];
   selectedConversacion: Conversacion | null = null;
+  connectionError = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -69,7 +69,10 @@ export class AsesorDetailComponent implements OnInit {
                 this.connectionState = state === 'open' ? 'activo' : 'inactivo';
                 this.asesor!.estado = this.connectionState;
               },
-              error: (err) => console.error(err),
+              error: (err) => {
+                this.connectionError = true;
+                console.log(err);
+              },
             });
         }
 
@@ -86,7 +89,6 @@ export class AsesorDetailComponent implements OnInit {
     });
   }
 
-
   logout() {
     if (!this.asesor) return;
     this.evolutionService.deleteInstance(this.asesor.nombre).subscribe({
@@ -97,6 +99,18 @@ export class AsesorDetailComponent implements OnInit {
       },
       error: (err) => console.error(err),
     });
+  }
+
+  crearInstancia() {
+    if (!this.asesor) return;
+    this.evolutionService
+      .createInstance(this.asesor.nombre,)
+      .subscribe({
+        next: (res) => {
+          this.connectionError = false;
+        },
+        error: (err) => console.error(err),
+      });
   }
 
   irAConversacion(conv: Conversacion) {

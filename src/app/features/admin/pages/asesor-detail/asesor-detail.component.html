@@ -10,51 +10,64 @@
     <div class="spacer"></div>
 
     <div class="right-block">
-      <div *ngIf="asesor!.estado !== 'activo'" class="asesor-qr">
-        <img *ngIf="qrBase64" [src]="qrBase64" alt="QR de conexión" />
-        <button
-          class="btn btn-primary"
-          (click)="abrirQRModal()"
-          [disabled]="loadingQR"
-        >
-          <mat-icon class="icon-left">qr_code</mat-icon>
-          Conectar
-        </button>
-      </div>
+      <!-- Mostrar botones normales solo si NO hay error -->
+      <ng-container *ngIf="!connectionError; else crearInstanciaBlock">
+        <div *ngIf="asesor!.estado !== 'activo'" class="asesor-qr">
+          <img *ngIf="qrBase64" [src]="qrBase64" alt="QR de conexión" />
+          <button
+            class="btn btn-primary"
+            (click)="abrirQRModal()"
+            [disabled]="loadingQR"
+          >
+            <mat-icon class="icon-left">qr_code</mat-icon>
+            Conectar
+          </button>
+        </div>
 
-      <div  class="asesor-botones">
-        <button class="btn btn-warn" (click)="logout()">
-          <mat-icon class="icon-left">close</mat-icon>
-          Cerrar Instancia
-        </button>
-      </div>
+        <div class="asesor-botones">
+          <button class="btn btn-warn" (click)="logout()">
+            <mat-icon class="icon-left">close</mat-icon>
+            Cerrar Instancia
+          </button>
+        </div>
+      </ng-container>
+
+      <!-- Bloque alternativo si hay error -->
+      <ng-template #crearInstanciaBlock>
+        <div class="asesor-botones">
+          <button class="btn btn-success" (click)="crearInstancia()">
+            <mat-icon class="icon-left">add</mat-icon>
+            Crear Instancia
+          </button>
+        </div>
+      </ng-template>
     </div>
   </div>
 
   <div class="conversaciones-block mt-4">
-  <hr />
-  <div *ngIf="conversaciones.length === 0" class="no-conversaciones">
-    <p>Sin conversaciones</p>
-  </div>
+    <hr />
+    <div *ngIf="conversaciones.length === 0" class="no-conversaciones">
+      <p>Sin conversaciones</p>
+    </div>
 
-  <div *ngIf="conversaciones.length > 0" class="conversaciones-list">
-    <div
-      *ngFor="let conv of conversaciones"
-      class="card conversacion-card mb-2"
-      (click)="irAConversacion(conv)"
-    >
-      <div class="card-body d-flex justify-content-between align-items-center">
-        <div>
-          <h6 class="mb-1">
-            <strong>{{ conv.nombre_cliente || 'Sin nombre' }}</strong>
-          </h6>
-          <span class="badge text-bg-info">Número: {{ conv.cliente_numero }}</span>
+    <div *ngIf="conversaciones.length > 0" class="conversaciones-list">
+      <div
+        *ngFor="let conv of conversaciones"
+        class="card conversacion-card mb-2"
+        (click)="irAConversacion(conv)"
+      >
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <div>
+            <h6 class="mb-1">
+              <strong>{{ conv.nombre_cliente || 'Sin nombre' }}</strong>
+            </h6>
+            <span class="badge text-bg-info">Número: {{ conv.cliente_numero }}</span>
+          </div>
+          <span class="badge bg-secondary">
+            {{ conv.fin }}
+          </span>
         </div>
-        <span class="badge bg-secondary">
-          {{ conv.fin }}
-        </span>
       </div>
     </div>
   </div>
-</div>
 </div>

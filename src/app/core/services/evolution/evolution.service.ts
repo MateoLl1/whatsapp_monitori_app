@@ -15,10 +15,9 @@ export class EvolutionService {
     return this.http.get(`${this.baseUrl}/state/${instanceName}`);
   }
 
-  createInstance(instanceName: string, webhookUrl: string): Observable<any> {
+  createInstance(instanceName: string, ): Observable<any> {
     return this.http.post(`${this.baseUrl}/create`, {
       instanceName,
-      webhookUrl,
     });
   }
 
@@ -31,7 +30,7 @@ export class EvolutionService {
   }
 
   logoutInstance(instanceName: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/delete/${instanceName}`);
+    return this.http.delete(`${this.baseUrl}/logout/${instanceName}`);
   }
 
   fetchInstances(): Observable<any> {
