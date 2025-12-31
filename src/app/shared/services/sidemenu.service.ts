@@ -12,10 +12,10 @@ export interface MenuItem {
 })
 export class SideMenuService {
   private readonly menuItems: MenuItem[] = [
-    { label: 'Inicio', icon: 'group', route: '/admin/dashboard' },
+    { label: 'Inicio', icon: 'home', route: '/admin/dashboard' },
     { label: 'Asesores', icon: 'group', route: '/admin/asesores' },
-    { label: 'Clientes', icon: 'person', route: '/admin/clientes/1' },
-    { label: 'Chat', icon: 'chat', route: '/admin/chat/1' },
+    { label: 'Clientes', icon: 'person', route: '/admin/clientes' },
+    { label: 'Chat', icon: 'chat', route: '/admin/chat' },
     { label: 'Configuración', icon: 'settings', route: '/admin/settings' },
   ];
 

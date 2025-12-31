@@ -16,7 +16,6 @@
     <div class="spacer"></div>
 
     <div class="right-block">
-      <!-- Mostrar botones normales solo si NO hay error -->
       <ng-container *ngIf="!connectionError; else crearInstanciaBlock">
         <div *ngIf="asesor!.estado !== 'activo'" class="asesor-qr">
           <img *ngIf="qrBase64" [src]="qrBase64" alt="QR de conexión" />
@@ -38,7 +37,6 @@
         </div>
       </ng-container>
 
-      <!-- Bloque alternativo si hay error -->
       <ng-template #crearInstanciaBlock>
         <div class="asesor-botones">
           <button class="btn btn-success" (click)="crearInstancia()">
@@ -70,7 +68,7 @@
             <span class="badge text-bg-info">Número: {{ conv.cliente_numero }}</span>
           </div>
           <span class="badge bg-secondary">
-            {{ conv.fin }}
+            {{ conv.fin | date: 'dd/MM/yyyy HH:mm' }}
           </span>
         </div>
       </div>
