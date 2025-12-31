@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../../services/alert.service';
 import { AsesoresService } from '../../../../core/services/asesor/asesores.service';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'modal-create-asesor-modal',
@@ -15,6 +16,7 @@ import { AsesoresService } from '../../../../core/services/asesor/asesores.servi
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     FormsModule,
   ],
   templateUrl: './create-asesor-modal.component.html',
@@ -23,6 +25,7 @@ import { AsesoresService } from '../../../../core/services/asesor/asesores.servi
 export class CreateAsesorModalComponent {
   nombre = '';
   numero_whatsapp = '';
+  pais = '593';
 
   constructor(
     private dialogRef: MatDialogRef<CreateAsesorModalComponent>,
@@ -30,25 +33,56 @@ export class CreateAsesorModalComponent {
     private alertService: AlertService
   ) {}
 
+  private toPascalCase(value: string): string {
+    return value
+      .split(/\s+/) // separar por espacios
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join('');
+  }
+
+  private normalizeNumero(numero: string): string {
+    let clean = numero.replace(/\s+/g, '');
+    clean = clean.replace(/\+/g, '');
+    if (clean.startsWith('0')) {
+      clean = clean.substring(1);
+    }
+    return clean;
+  }
+
   crear() {
     if (!this.nombre || !this.numero_whatsapp) {
       this.alertService.error('Nombre y número de WhatsApp son obligatorios');
       return;
     }
 
-    this.asesorService.createAsesor({
-      nombre: this.nombre,
-      activo: true,
-      numero_whatsapp: this.numero_whatsapp
-    }).subscribe({
-      next: (res) => {
-        this.alertService.success('Asesor creado correctamente');
-        this.dialogRef.close(res);
-      },
-      error: () => {
-        this.alertService.error('Error al crear el asesor');
-      },
-    });
+    const nombreFinal = this.toPascalCase(this.nombre);
+    const numeroNormalizado = this.normalizeNumero(this.numero_whatsapp);
+
+    const regex = /^[0-9]{9,10}$/;
+    if (!regex.test(numeroNormalizado)) {
+      this.alertService.error(
+        'El número debe tener exactamente 9 o 10 dígitos, sin + ni letras'
+      );
+      return;
+    }
+
+    const numeroFinal = this.pais + numeroNormalizado;
+
+    this.asesorService
+      .createAsesor({
+        nombre: nombreFinal,
+        activo: true,
+        numero_whatsapp: numeroFinal,
+      })
+      .subscribe({
+        next: (res) => {
+          this.alertService.success('Asesor creado correctamente');
+          this.dialogRef.close(res);
+        },
+        error: () => {
+          this.alertService.error('Error al crear el asesor');
+        },
+      });
   }
 
   cancelar() {
