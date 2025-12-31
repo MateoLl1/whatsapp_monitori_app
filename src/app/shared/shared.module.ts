@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertDangerComponent } from './components/alerts/alert-danger/alert-danger.component';
 
 
 
@@ -9,6 +10,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule
-  ]
+  ],
 })
 export class SharedModule { }

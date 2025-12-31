@@ -6,7 +6,12 @@
 </div>
 
 <!-- Listado de asesores -->
+
 <div class="asesores-container">
+
+  <shared-alert-danger *ngIf="asesores.length === 0" [label]="'No se ha creado ningun asesor'">
+  </shared-alert-danger>
+
   <mat-card
     class="asesor-card"
     *ngFor="let asesor of asesores"

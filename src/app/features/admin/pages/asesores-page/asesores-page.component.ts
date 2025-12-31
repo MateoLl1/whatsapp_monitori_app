@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateAsesorModalComponent } from '../../../../shared/components/modals/create-asesor-modal/create-asesor-modal.component';
 import { AsesoresService } from '../../../../core/services/asesor/asesores.service';
 import { Asesor } from '../../../../shared/interfaces/asesor.interface';
+import { AlertDangerComponent } from "../../../../shared/components/alerts/alert-danger/alert-danger.component";
 
 @Component({
   selector: 'app-asesores-page',
@@ -15,8 +16,9 @@ import { Asesor } from '../../../../shared/interfaces/asesor.interface';
     CommonModule,
     RouterModule,
     MatCardModule,
-    MatIconModule
-  ],
+    MatIconModule,
+    AlertDangerComponent
+],
   templateUrl: './asesores-page.component.html',
   styleUrls: ['./asesores-page.component.css'],
 })
