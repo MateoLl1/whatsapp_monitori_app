@@ -2,7 +2,13 @@
   <div class="asesor-row">
     <div class="info-block">
       <h2 class="asesor-nombre">{{ asesor!.nombre }}</h2>
-      <p class="card bg-secondary text-center asesor-estado">
+      <p
+        class="card text-center asesor-estado"
+        [ngClass]="{
+          'estado-activo': asesor!.estado === 'activo' || asesor!.activo,
+          'estado-inactivo': asesor!.estado === 'inactivo' || !asesor!.activo
+        }"
+      >
         Estado: {{ asesor!.estado || (asesor!.activo ? "activo" : "inactivo") }}
       </p>
     </div>

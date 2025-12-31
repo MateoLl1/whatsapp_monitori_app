@@ -147,3 +147,12 @@
   background-color: var(--color-blue);
   color: var(--color-bg-dark);
 }
+.estado-activo {
+  background-color: var(--color-green);
+  font-weight: bold;
+}
+
+.estado-inactivo {
+  background-color: var(--color-red);
+  font-weight: bold;
+}
