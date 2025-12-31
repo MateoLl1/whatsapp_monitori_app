@@ -11,7 +11,7 @@ import {
   MenuItem,
   SideMenuService,
 } from '../../../../shared/services/sidemenu.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-admin-layout',
@@ -32,7 +32,14 @@ import { CommonModule } from '@angular/common';
 export class AdminLayoutComponent {
   menuItems: MenuItem[];
 
-  constructor(private readonly menuService: SideMenuService) {
+  constructor(
+    private readonly menuService: SideMenuService,
+    private location:Location
+) {
     this.menuItems = this.menuService.getMenuItems();
+  }
+
+  regresar(){
+    this.location.back();
   }
 }
