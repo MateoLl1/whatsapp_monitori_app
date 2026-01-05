@@ -1,0 +1,80 @@
+.add-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 24px;
+}
+
+.add-btn-container button {
+  border-radius: 15%;
+  width: 50px;
+  height: 50px;
+}
+
+.clientes-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 24px;
+}
+
+.cliente-card {
+  background-color: var(--color-bg-toolbar);
+  color: var(--color-text);
+  border: 1px solid var(--color-border-light);
+  box-shadow: 0 0 8px var(--color-shadow-strong);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.cliente-card:hover {
+  transform: translateY(-4px);
+  background-color: var(--color-hover-light);
+}
+
+.cliente-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.avatar {
+  color: var(--color-primary);
+}
+
+.cliente-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.nombre {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.numero {
+  font-size: 14px;
+  color: var(--color-text-light);
+}
+
+.estado {
+  font-size: 14px;
+  text-transform: capitalize;
+  padding: 4px 8px;
+  border-radius: 12px;
+  min-width: 80px;
+  text-align: center;
+  color: #000;
+}
+
+.estado.activo {
+  background-color: var(--color-green);
+}
+
+.estado.inactivo {
+  background-color: var(--color-red);
+}

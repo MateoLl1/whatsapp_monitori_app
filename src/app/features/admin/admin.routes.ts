@@ -14,8 +14,8 @@ export const adminRoutes:Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'asesores', component: AsesoresPageComponent },
+      { path: 'clientes', component: ClientesPageComponent },
       { path: 'asesores/:id', component: AsesorDetailComponent },
-      { path: 'clientes/:asesorId', component: ClientesPageComponent },
       { path: 'chat/:clienteId', component: ChatPageComponent },
       { path: '**', redirectTo: 'asesores', pathMatch: 'full' },
     ],

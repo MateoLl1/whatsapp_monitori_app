@@ -1,1 +1,39 @@
-<h2>Clientes page</h2>
+<!-- Encabezado con botón -->
+<div class="add-btn-container">
+  <h2>Lista de clientes</h2>
+  <div class="spacer"></div>
+  <button mat-fab color="primary" (click)="cargarClientes()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</div>
+<hr />
+
+<!-- Listado de clientes -->
+<div class="clientes-container">
+  <shared-alert-danger
+    *ngIf="conversaciones.length === 0"
+    [label]="'No hay clientes registrados'"
+  >
+  </shared-alert-danger>
+
+  <mat-card
+    class="cliente-card"
+    *ngFor="let conv of conversaciones"
+    appearance="outlined"
+  >
+    <div class="cliente-row">
+      <mat-icon class="avatar">person</mat-icon>
+      <div class="cliente-info">
+        <span class="nombre">{{ conv.nombre_cliente || 'Sin nombre' }}</span>
+        <span class="numero">{{ conv.cliente_numero }}</span>
+      </div>
+      <span
+        class="estado"
+        [class.activo]="conv.estado === 'activo'"
+        [class.inactivo]="conv.estado === 'inactivo'"
+      >
+        {{ conv.estado || 'sin estado' }}
+      </span>
+    </div>
+  </mat-card>
+</div>
