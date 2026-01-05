@@ -71,7 +71,7 @@ export class CreateAsesorModalComponent {
     this.asesorService
       .createAsesor({
         nombre: nombreFinal,
-        activo: true,
+        activo: false,
         numero_whatsapp: numeroFinal,
       })
       .subscribe({
