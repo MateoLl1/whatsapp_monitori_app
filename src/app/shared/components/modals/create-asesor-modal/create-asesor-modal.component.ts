@@ -35,7 +35,7 @@ export class CreateAsesorModalComponent {
 
   private toPascalCase(value: string): string {
     return value
-      .split(/\s+/) // separar por espacios
+      .split(/\s+/)
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join('');
   }
@@ -78,6 +78,7 @@ export class CreateAsesorModalComponent {
         next: (res) => {
           this.alertService.success('Asesor creado correctamente');
           this.dialogRef.close(res);
+          location.reload();
         },
         error: () => {
           this.alertService.error('Error al crear el asesor');

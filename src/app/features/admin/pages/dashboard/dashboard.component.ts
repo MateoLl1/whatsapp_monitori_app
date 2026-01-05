@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
         this.totalAsesores = data.asesores;
         this.conectados = data.conectados;
         this.desconectados = data.desconectados;
+        this.respuestasHoy = data.mensajesHoy;
         this.error = false;
       },
       error: () => {
