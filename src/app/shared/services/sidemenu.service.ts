@@ -15,7 +15,6 @@ export class SideMenuService {
     { label: 'Inicio', icon: 'home', route: '/admin/dashboard' },
     { label: 'Asesores', icon: 'group', route: '/admin/asesores' },
     { label: 'Clientes', icon: 'person', route: '/admin/clientes' },
-    { label: 'Chat', icon: 'chat', route: '/admin/chat' },
     { label: 'Configuración', icon: 'settings', route: '/admin/settings' },
   ];
 
