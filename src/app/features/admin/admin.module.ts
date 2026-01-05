@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     AsesoresPageComponent,
 
+
   ],
 })
 export class AdminModule {}
