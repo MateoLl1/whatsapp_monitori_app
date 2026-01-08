@@ -74,13 +74,6 @@ select {
   width: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-bg-dark);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-green);
-}
 
 .mat-sidenav {
   background-color: var(--color-bg-toolbar) !important;
