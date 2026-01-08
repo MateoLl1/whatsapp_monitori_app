@@ -49,7 +49,6 @@ export class ChatPageComponent implements OnInit, AfterViewChecked {
       mensaje: this.nuevoMensaje,
       fromMe: true,
       fecha: new Date(),
-      conversacion: { id: this.conversacionId } as any
     };
 
     this.mensajesService.create(msg).subscribe({

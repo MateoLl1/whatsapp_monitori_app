@@ -1,10 +1,8 @@
-import { Conversacion } from './conversacion.interface';
-
 export interface Mensaje {
   id: number;
-  conversacion: Conversacion;
   mensaje: string;
   fecha: Date;
   fromMe: boolean;
+  objeto: string | null;
+  tipo: string | null;
 }
-

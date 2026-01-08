@@ -3,8 +3,27 @@
     <div *ngFor="let msg of mensajes"
          class="chat-message"
          [ngClass]="{ 'from-me': msg.fromMe, 'from-them': !msg.fromMe }">
+
       <div class="bubble">
-        <span class="text">{{ msg.mensaje }}</span>
+        <!-- Texto -->
+        <span *ngIf="!msg.objeto" class="text">{{ msg.mensaje }}</span>
+
+        <!-- Imagen -->
+        <img *ngIf="msg.tipo === 'imagen'" [src]="msg.objeto" class="chat-image" />
+
+        <!-- Sticker -->
+        <img *ngIf="msg.tipo === 'sticker'" [src]="msg.objeto" class="chat-sticker" />
+
+        <!-- Audio -->
+        <audio *ngIf="msg.tipo === 'audio'" controls>
+          <source [src]="msg.objeto" type="audio/ogg" />
+        </audio>
+
+        <!-- Video -->
+        <video *ngIf="msg.tipo === 'video'" controls class="chat-video">
+          <source [src]="msg.objeto" type="video/mp4" />
+        </video>
+
         <span class="timestamp">{{ msg.fecha | date:'shortTime' }}</span>
       </div>
     </div>

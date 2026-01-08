@@ -2,25 +2,23 @@
   display: flex;
   flex-direction: column;
   height: 85vh;
-  overflow: hidden; /* evita que todo el componente scrollee */
+  overflow: hidden;
 }
 
 .chat-container {
-  flex: 1;              /* ocupa todo el espacio disponible arriba */
-  overflow-y: auto;     /* solo el chat hace scroll */
+  flex: 1;
+  overflow-y: auto;
   padding: 16px;
   background-color: var(--color-bg-dark);
   display: flex;
   flex-direction: column;
 }
 
-/* Mensaje base */
 .chat-message {
   display: flex;
   margin: 4px 0;
 }
 
-/* Mensajes enviados por el asesor (fromMe = true) */
 .chat-message.from-me {
   justify-content: flex-end;
 }
@@ -34,7 +32,6 @@
   position: relative;
 }
 
-/* Mensajes recibidos (fromMe = false) */
 .chat-message.from-them {
   justify-content: flex-start;
 }
@@ -48,7 +45,6 @@
   position: relative;
 }
 
-/* Texto y timestamp */
 .bubble .text {
   display: block;
   word-wrap: break-word;
@@ -61,9 +57,8 @@
   float: right;
 }
 
-/* Caja de texto fija abajo */
 .chat-input {
-  flex-shrink: 0;       /* evita que se reduzca o empuje */
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   padding: 8px;
@@ -92,4 +87,28 @@
   height: 36px;
   cursor: pointer;
   font-size: 18px;
+}
+
+/* Multimedia */
+.chat-image {
+  max-width: 200px;
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+.chat-sticker {
+  width: 100px;
+  height: auto;
+  margin-top: 4px;
+}
+
+.chat-audio {
+  margin-top: 4px;
+  width: 200px;
+}
+
+.chat-video {
+  max-width: 250px;
+  border-radius: 8px;
+  margin-top: 4px;
 }
