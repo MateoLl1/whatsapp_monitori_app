@@ -8,8 +8,11 @@
         <!-- Texto -->
         <span *ngIf="!msg.objeto" class="text">{{ msg.mensaje }}</span>
 
-        <!-- Imagen -->
-        <img *ngIf="msg.tipo === 'imagen'" [src]="msg.objeto" class="chat-image" />
+        <!-- Imagen con click -->
+        <img *ngIf="msg.tipo === 'imagen'"
+             [src]="msg.objeto"
+             class="chat-image"
+             (click)="openImageModal(msg.objeto)" />
 
         <!-- Sticker -->
         <img *ngIf="msg.tipo === 'sticker'" [src]="msg.objeto" class="chat-sticker" />
@@ -37,5 +40,13 @@
       (keyup.enter)="enviarMensaje()"
     />
     <button (click)="enviarMensaje()">➤</button>
+  </div>
+</div>
+
+<!-- 🔹 Modal de imagen -->
+<div class="image-modal" *ngIf="showImageModal" (click)="closeImageModal()">
+  <div class="image-modal-content" (click)="$event.stopPropagation()">
+    <img [src]="selectedImagen" alt="Imagen" />
+    <button class="close-btn" (click)="closeImageModal()">✖</button>
   </div>
 </div>

@@ -8,10 +8,13 @@ import { MensajesService } from '../../../../core/services/mensajes/mensajes.ser
   templateUrl: './chat-page.component.html',
   styleUrls: ['./chat-page.component.css'],
 })
-export class ChatPageComponent implements OnInit, AfterViewChecked {
+export class ChatPageComponent implements OnInit {
   mensajes: Mensaje[] = [];
   nuevoMensaje = '';
   conversacionId!: number;
+
+  selectedImagen: string | null = null;
+  showImageModal = false;
 
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
 
@@ -27,14 +30,32 @@ export class ChatPageComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  ngAfterViewChecked(): void {
-    this.scrollToBottom();
+  openImageModal(url: string) {
+
+    const container = this.chatContainer.nativeElement;
+    this.scrollPosition = container.scrollTop;
+
+    this.selectedImagen = url;
+    this.showImageModal = true;
   }
+
+  closeImageModal() {
+    this.selectedImagen = null;
+    this.showImageModal = false;
+
+
+    const container = this.chatContainer.nativeElement;
+    container.scrollTop = this.scrollPosition;
+  }
+
+  private scrollPosition = 0;
 
   private loadMessages(conversacionId: number): void {
     this.mensajesService.findByConversacion(conversacionId).subscribe({
       next: (res: Mensaje[]) => {
         this.mensajes = res;
+
+        this.scrollToBottom();
       },
       error: (err) => {
         console.error('Error al cargar mensajes', err);
@@ -45,7 +66,9 @@ export class ChatPageComponent implements OnInit, AfterViewChecked {
   enviarMensaje(): void {
     if (!this.nuevoMensaje.trim()) return;
 
-    const conversacion = this.mensajes.length > 0 ? this.mensajes[0].conversacion : { id: this.conversacionId } as any;
+    const conversacion = this.mensajes.length > 0
+      ? this.mensajes[0].conversacion
+      : { id: this.conversacionId } as any;
 
     const msg: Partial<Mensaje> = {
       mensaje: this.nuevoMensaje,
@@ -53,10 +76,12 @@ export class ChatPageComponent implements OnInit, AfterViewChecked {
       fecha: new Date(),
       conversacion: conversacion
     };
+
     this.mensajesService.create(msg).subscribe({
       next: (res) => {
         this.mensajes.push(res);
         this.nuevoMensaje = '';
+
         this.scrollToBottom();
       },
       error: (err) => {
@@ -67,7 +92,8 @@ export class ChatPageComponent implements OnInit, AfterViewChecked {
 
   private scrollToBottom(): void {
     try {
-      this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+      const container = this.chatContainer.nativeElement;
+      container.scrollTop = container.scrollHeight;
     } catch (err) {
       console.error('Error al hacer scroll', err);
     }
