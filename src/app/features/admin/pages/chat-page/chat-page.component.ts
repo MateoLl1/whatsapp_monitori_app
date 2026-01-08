@@ -45,12 +45,14 @@ export class ChatPageComponent implements OnInit, AfterViewChecked {
   enviarMensaje(): void {
     if (!this.nuevoMensaje.trim()) return;
 
+    const conversacion = this.mensajes.length > 0 ? this.mensajes[0].conversacion : { id: this.conversacionId } as any;
+
     const msg: Partial<Mensaje> = {
       mensaje: this.nuevoMensaje,
       fromMe: true,
       fecha: new Date(),
+      conversacion: conversacion
     };
-
     this.mensajesService.create(msg).subscribe({
       next: (res) => {
         this.mensajes.push(res);

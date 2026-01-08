@@ -1,3 +1,5 @@
+import { Conversacion } from "./conversacion.interface";
+
 export interface Mensaje {
   id: number;
   mensaje: string;
@@ -5,4 +7,5 @@ export interface Mensaje {
   fromMe: boolean;
   objeto: string | null;
   tipo: string | null;
+  conversacion: Conversacion;
 }
