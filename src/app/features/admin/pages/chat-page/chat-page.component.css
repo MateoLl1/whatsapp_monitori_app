@@ -12,6 +12,7 @@
   background-color: var(--color-bg-dark);
   display: flex;
   flex-direction: column;
+  scroll-behavior: smooth;
 }
 
 .chat-message {
@@ -45,18 +46,28 @@
   position: relative;
 }
 
+/* Burbuja vertical */
+.bubble {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
 .bubble .text {
   display: block;
   word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .bubble .timestamp {
   font-size: 0.75rem;
   color: var(--color-text-secondary);
   margin-left: 8px;
-  float: right;
+  align-self: flex-end;
 }
 
+/* Caja de texto fija abajo */
 .chat-input {
   flex-shrink: 0;
   display: flex;
@@ -93,29 +104,28 @@
 .chat-image {
   max-width: 200px;
   border-radius: 8px;
-  margin-top: 4px;
+  margin-bottom: 4px;
+  cursor: pointer;
 }
 
 .chat-sticker {
   width: 100px;
   height: auto;
-  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .chat-audio {
-  margin-top: 4px;
   width: 200px;
+  margin-bottom: 4px;
 }
 
 .chat-video {
   max-width: 250px;
   border-radius: 8px;
-  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
-
 /*** MODAL IMAGEN */
-
 .image-modal {
   position: fixed;
   top: 0;

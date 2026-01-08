@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Mensaje } from '../../../../shared/interfaces/mensaje.interface';
 import { MensajesService } from '../../../../core/services/mensajes/mensajes.service';
@@ -8,7 +8,7 @@ import { MensajesService } from '../../../../core/services/mensajes/mensajes.ser
   templateUrl: './chat-page.component.html',
   styleUrls: ['./chat-page.component.css'],
 })
-export class ChatPageComponent implements OnInit {
+export class ChatPageComponent implements OnInit, AfterViewInit {
   mensajes: Mensaje[] = [];
   nuevoMensaje = '';
   conversacionId!: number;
@@ -17,6 +17,8 @@ export class ChatPageComponent implements OnInit {
   showImageModal = false;
 
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
+
+  private scrollPosition = 0;
 
   constructor(
     private mensajesService: MensajesService,
@@ -30,11 +32,13 @@ export class ChatPageComponent implements OnInit {
     }
   }
 
-  openImageModal(url: string) {
+  ngAfterViewInit(): void {
+    setTimeout(() => this.scrollToBottom(), 0);
+  }
 
+  openImageModal(url: string) {
     const container = this.chatContainer.nativeElement;
     this.scrollPosition = container.scrollTop;
-
     this.selectedImagen = url;
     this.showImageModal = true;
   }
@@ -42,20 +46,16 @@ export class ChatPageComponent implements OnInit {
   closeImageModal() {
     this.selectedImagen = null;
     this.showImageModal = false;
-
-
     const container = this.chatContainer.nativeElement;
     container.scrollTop = this.scrollPosition;
   }
-
-  private scrollPosition = 0;
 
   private loadMessages(conversacionId: number): void {
     this.mensajesService.findByConversacion(conversacionId).subscribe({
       next: (res: Mensaje[]) => {
         this.mensajes = res;
-
-        this.scrollToBottom();
+        // 🔹 espera a que Angular pinte la lista antes de hacer scroll
+        setTimeout(() => this.scrollToBottom(), 0);
       },
       error: (err) => {
         console.error('Error al cargar mensajes', err);
@@ -81,8 +81,7 @@ export class ChatPageComponent implements OnInit {
       next: (res) => {
         this.mensajes.push(res);
         this.nuevoMensaje = '';
-
-        this.scrollToBottom();
+        setTimeout(() => this.scrollToBottom(), 0);
       },
       error: (err) => {
         console.error('Error al enviar mensaje', err);

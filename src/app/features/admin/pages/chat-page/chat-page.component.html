@@ -5,28 +5,20 @@
          [ngClass]="{ 'from-me': msg.fromMe, 'from-them': !msg.fromMe }">
 
       <div class="bubble">
-        <!-- Texto -->
-        <span *ngIf="!msg.objeto" class="text">{{ msg.mensaje }}</span>
+        <!-- Texto arriba -->
+        <span *ngIf="msg.mensaje" class="text">{{ msg.mensaje }}</span>
 
-        <!-- Imagen con click -->
-        <img *ngIf="msg.tipo === 'imagen'"
-             [src]="msg.objeto"
-             class="chat-image"
-             (click)="openImageModal(msg.objeto)" />
-
-        <!-- Sticker -->
+        <!-- Multimedia debajo -->
+        <img *ngIf="msg.tipo === 'imagen'" [src]="msg.objeto" class="chat-image" (click)="openImageModal(msg.objeto)" />
         <img *ngIf="msg.tipo === 'sticker'" [src]="msg.objeto" class="chat-sticker" />
-
-        <!-- Audio -->
-        <audio *ngIf="msg.tipo === 'audio'" controls>
+        <audio *ngIf="msg.tipo === 'audio'" controls class="chat-audio">
           <source [src]="msg.objeto" type="audio/ogg" />
         </audio>
-
-        <!-- Video -->
         <video *ngIf="msg.tipo === 'video'" controls class="chat-video">
           <source [src]="msg.objeto" type="video/mp4" />
         </video>
 
+        <!-- Timestamp al final -->
         <span class="timestamp">{{ msg.fecha | date:'shortTime' }}</span>
       </div>
     </div>
@@ -42,6 +34,7 @@
     <button (click)="enviarMensaje()">➤</button>
   </div>
 </div>
+
 
 <!-- 🔹 Modal de imagen -->
 <div class="image-modal" *ngIf="showImageModal" (click)="closeImageModal()">
