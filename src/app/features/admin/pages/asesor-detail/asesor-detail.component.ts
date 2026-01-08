@@ -78,9 +78,13 @@ export class AsesorDetailComponent implements OnInit {
 
         this.conversacionesService.findAll().subscribe({
           next: (res) => {
-            this.conversaciones = res.filter(
-              (c: Conversacion) => c.asesor?.id === this.asesor?.id
-            );
+            this.conversaciones = res
+              .filter((c: Conversacion) => c.asesor?.id === this.asesor?.id)
+              .sort((a, b) => {
+                const fechaA = new Date(a.fin ?? a.inicio).getTime();
+                const fechaB = new Date(b.fin ?? b.inicio).getTime();
+                return fechaB - fechaA;
+              });
           },
           error: (err) => console.error(err),
         });
@@ -103,14 +107,12 @@ export class AsesorDetailComponent implements OnInit {
 
   crearInstancia() {
     if (!this.asesor) return;
-    this.evolutionService
-      .createInstance(this.asesor.nombre,)
-      .subscribe({
-        next: (res) => {
-          this.connectionError = false;
-        },
-        error: (err) => console.error(err),
-      });
+    this.evolutionService.createInstance(this.asesor.nombre).subscribe({
+      next: (res) => {
+        this.connectionError = false;
+      },
+      error: (err) => console.error(err),
+    });
   }
 
   irAConversacion(conv: Conversacion) {

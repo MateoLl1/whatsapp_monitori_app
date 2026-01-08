@@ -54,8 +54,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.mensajesService.findByConversacion(conversacionId).subscribe({
       next: (res: Mensaje[]) => {
         this.mensajes = res;
-        // 🔹 espera a que Angular pinte la lista antes de hacer scroll
-        setTimeout(() => this.scrollToBottom(), 0);
+        this.scrollToBottom();
       },
       error: (err) => {
         console.error('Error al cargar mensajes', err);
@@ -81,7 +80,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       next: (res) => {
         this.mensajes.push(res);
         this.nuevoMensaje = '';
-        setTimeout(() => this.scrollToBottom(), 0);
+        this.scrollToBottom();
       },
       error: (err) => {
         console.error('Error al enviar mensaje', err);
