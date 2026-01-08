@@ -1,7 +1,14 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Mensaje } from '../../../../shared/interfaces/mensaje.interface';
 import { MensajesService } from '../../../../core/services/mensajes/mensajes.service';
+import { Conversacion } from '../../../../shared/interfaces/conversacion.interface';
 
 @Component({
   selector: 'app-chat-page',
@@ -12,12 +19,12 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   mensajes: Mensaje[] = [];
   nuevoMensaje = '';
   conversacionId!: number;
+  conversacionChat: Conversacion | null = null;
 
   selectedImagen: string | null = null;
   showImageModal = false;
 
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
-
   private scrollPosition = 0;
 
   constructor(
@@ -28,7 +35,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.conversacionId = Number(this.route.snapshot.paramMap.get('clienteId'));
     if (this.conversacionId) {
-      this.loadMessages(this.conversacionId);
+      this.loadMessages();
     }
   }
 
@@ -36,56 +43,52 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     setTimeout(() => this.scrollToBottom(), 0);
   }
 
-  openImageModal(url: string) {
-    const container = this.chatContainer.nativeElement;
-    this.scrollPosition = container.scrollTop;
-    this.selectedImagen = url;
-    this.showImageModal = true;
-  }
-
-  closeImageModal() {
-    this.selectedImagen = null;
-    this.showImageModal = false;
-    const container = this.chatContainer.nativeElement;
-    container.scrollTop = this.scrollPosition;
-  }
-
-  private loadMessages(conversacionId: number): void {
-    this.mensajesService.findByConversacion(conversacionId).subscribe({
+  private loadMessages(): void {
+    this.mensajesService.findByConversacion(this.conversacionId).subscribe({
       next: (res: Mensaje[]) => {
         this.mensajes = res;
-        this.scrollToBottom();
+        this.conversacionChat = res.length > 0 ? res[0].conversacion : null;
+        setTimeout(() => this.scrollToBottom(), 0);
       },
       error: (err) => {
         console.error('Error al cargar mensajes', err);
-      }
+      },
     });
   }
 
   enviarMensaje(): void {
-    if (!this.nuevoMensaje.trim()) return;
-
-    const conversacion = this.mensajes.length > 0
-      ? this.mensajes[0].conversacion
-      : { id: this.conversacionId } as any;
+    const texto = this.nuevoMensaje.trim();
+    if (!texto || !this.conversacionChat) return;
 
     const msg: Partial<Mensaje> = {
-      mensaje: this.nuevoMensaje,
+      mensaje: texto,
       fromMe: true,
       fecha: new Date(),
-      conversacion: conversacion
+      conversacion: this.conversacionChat,
     };
 
     this.mensajesService.create(msg).subscribe({
       next: (res) => {
         this.mensajes.push(res);
         this.nuevoMensaje = '';
-        this.scrollToBottom();
+        setTimeout(() => this.scrollToBottom(), 0);
       },
       error: (err) => {
         console.error('Error al enviar mensaje', err);
-      }
+      },
     });
+  }
+
+  openImageModal(url: string): void {
+    this.scrollPosition = this.chatContainer.nativeElement.scrollTop;
+    this.selectedImagen = url;
+    this.showImageModal = true;
+  }
+
+  closeImageModal(): void {
+    this.selectedImagen = null;
+    this.showImageModal = false;
+    this.chatContainer.nativeElement.scrollTop = this.scrollPosition;
   }
 
   private scrollToBottom(): void {

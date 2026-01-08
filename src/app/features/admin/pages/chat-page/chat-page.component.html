@@ -1,45 +1,61 @@
-<div class="chat-wrapper">
-  <div #chatContainer class="chat-container">
-    <div *ngFor="let msg of mensajes"
-         class="chat-message"
-         [ngClass]="{ 'from-me': msg.fromMe, 'from-them': !msg.fromMe }">
+<div class="chat-toolbar">
+  <span class="chat-toolbar-title">{{ conversacionChat.nombre_cliente }}</span>
+  <span class="chat-toolbar-subtitle">{{ conversacionChat.cliente_numero }}</span>
+</div>
 
-      <div class="bubble">
-        <!-- Texto arriba -->
-        <span *ngIf="msg.mensaje" class="text">{{ msg.mensaje }}</span>
 
-        <!-- Multimedia debajo -->
-        <img *ngIf="msg.tipo === 'imagen'" [src]="msg.objeto" class="chat-image" (click)="openImageModal(msg.objeto)" />
-        <img *ngIf="msg.tipo === 'sticker'" [src]="msg.objeto" class="chat-sticker" />
-        <audio *ngIf="msg.tipo === 'audio'" controls class="chat-audio">
-          <source [src]="msg.objeto" type="audio/ogg" />
-        </audio>
-        <video *ngIf="msg.tipo === 'video'" controls class="chat-video">
-          <source [src]="msg.objeto" type="video/mp4" />
-        </video>
+  <div class="chat-wrapper">
+    <div #chatContainer class="chat-container">
+      <div
+        *ngFor="let msg of mensajes"
+        class="chat-message"
+        [ngClass]="{ 'from-me': msg.fromMe, 'from-them': !msg.fromMe }"
+      >
+        <div class="bubble">
+          <!-- Texto arriba -->
+          <span *ngIf="msg.mensaje" class="text">{{ msg.mensaje }}</span>
 
-        <!-- Timestamp al final -->
-        <span class="timestamp">{{ msg.fecha | date:'shortTime' }}</span>
+          <!-- Multimedia debajo -->
+          <img
+            *ngIf="msg.tipo === 'imagen'"
+            [src]="msg.objeto"
+            class="chat-image"
+            (click)="openImageModal(msg.objeto)"
+          />
+          <img
+            *ngIf="msg.tipo === 'sticker'"
+            [src]="msg.objeto"
+            class="chat-sticker"
+          />
+          <audio *ngIf="msg.tipo === 'audio'" controls class="chat-audio">
+            <source [src]="msg.objeto" type="audio/ogg" />
+          </audio>
+          <video *ngIf="msg.tipo === 'video'" controls class="chat-video">
+            <source [src]="msg.objeto" type="video/mp4" />
+          </video>
+
+          <!-- Timestamp al final -->
+          <span class="timestamp">{{ msg.fecha | date : "shortTime" }}</span>
+        </div>
       </div>
+    </div>
+
+    <div class="chat-input">
+      <input
+        type="text"
+        [(ngModel)]="nuevoMensaje"
+        placeholder="Escribe un mensaje"
+        (keyup.enter)="enviarMensaje()"
+      />
+      <button (click)="enviarMensaje()">➤</button>
     </div>
   </div>
 
-  <div class="chat-input">
-    <input
-      type="text"
-      [(ngModel)]="nuevoMensaje"
-      placeholder="Escribe un mensaje"
-      (keyup.enter)="enviarMensaje()"
-    />
-    <button (click)="enviarMensaje()">➤</button>
+  <!-- 🔹 Modal de imagen -->
+  <div class="image-modal" *ngIf="showImageModal" (click)="closeImageModal()">
+    <div class="image-modal-content" (click)="$event.stopPropagation()">
+      <img [src]="selectedImagen" alt="Imagen" />
+      <button class="close-btn" (click)="closeImageModal()">✖</button>
+    </div>
   </div>
-</div>
 
-
-<!-- 🔹 Modal de imagen -->
-<div class="image-modal" *ngIf="showImageModal" (click)="closeImageModal()">
-  <div class="image-modal-content" (click)="$event.stopPropagation()">
-    <img [src]="selectedImagen" alt="Imagen" />
-    <button class="close-btn" (click)="closeImageModal()">✖</button>
-  </div>
-</div>
