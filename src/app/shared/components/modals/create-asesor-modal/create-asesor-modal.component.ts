@@ -50,14 +50,15 @@ export class CreateAsesorModalComponent {
   }
 
   crear() {
-    if (!this.nombre || !this.numero_whatsapp) {
-      this.alertService.error('Nombre y número de WhatsApp son obligatorios');
+    if (!this.nombre) {
+      this.alertService.error('Nombre es obligatorio');
       return;
     }
 
     const nombreFinal = this.toPascalCase(this.nombre);
     const numeroNormalizado = this.normalizeNumero(this.numero_whatsapp);
 
+    /*
     const regex = /^[0-9]{9,10}$/;
     if (!regex.test(numeroNormalizado)) {
       this.alertService.error(
@@ -65,6 +66,7 @@ export class CreateAsesorModalComponent {
       );
       return;
     }
+    */
 
     const numeroFinal = this.pais + numeroNormalizado;
 
@@ -72,7 +74,7 @@ export class CreateAsesorModalComponent {
       .createAsesor({
         nombre: nombreFinal,
         activo: false,
-        numero_whatsapp: numeroFinal,
+        // numero_whatsapp: numeroFinal,
       })
       .subscribe({
         next: (res) => {
@@ -80,8 +82,12 @@ export class CreateAsesorModalComponent {
           this.dialogRef.close(res);
           location.reload();
         },
-        error: () => {
-          this.alertService.error('Error al crear el asesor');
+        error: (err) => {
+          const errorMessage =  err.error.message;
+          console.log(err);
+          errorMessage
+            ? this.alertService.error(errorMessage)
+            : this.alertService.error('Error al crear el asesor');
         },
       });
   }
