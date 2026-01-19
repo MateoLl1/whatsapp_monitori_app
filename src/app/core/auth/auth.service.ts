@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { ReplaySubject, firstValueFrom } from 'rxjs';
 import { TokenResponse } from '../interfaces/token.interfaces';
 import { environment } from '../../../environments/environment';
 
@@ -9,28 +9,45 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
   private apiUrl = environment.apiUrl;
-  private token$ = new BehaviorSubject<string | null>(null);
+
+  private token: string | null = null;
+  private tokenExp: number | null = null;
+  private tokenPromise: Promise<string> | null = null;
 
   constructor(private http: HttpClient) {}
 
   async getToken(): Promise<string> {
-    const current = this.token$.value;
-    if (current) {
-      return current;
+    if (this.token && this.tokenExp && Date.now() < this.tokenExp) {
+      return this.token;
     }
 
-    const response = await firstValueFrom(
-      this.http.post<TokenResponse>(
-        `${this.apiUrl}/auth/token`,
-        {}
-      )
-    );
+    if (this.tokenPromise) {
+      return this.tokenPromise;
+    }
 
-    this.token$.next(response.access_token);
-    return response.access_token;
+    this.tokenPromise = firstValueFrom(
+      this.http.post<TokenResponse>(`${this.apiUrl}/auth/token`, {})
+    ).then((response) => {
+      this.token = response.access_token;
+      this.tokenExp = this.getTokenExpiration(response.access_token);
+      this.tokenPromise = null;
+      return this.token;
+    }).catch((err) => {
+      this.tokenPromise = null;
+      throw err;
+    });
+
+    return this.tokenPromise;
   }
 
   clearToken() {
-    this.token$.next(null);
+    this.token = null;
+    this.tokenExp = null;
+    this.tokenPromise = null;
+  }
+
+  private getTokenExpiration(token: string): number {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.exp * 1000;
   }
 }

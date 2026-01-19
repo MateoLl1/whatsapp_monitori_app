@@ -4,12 +4,11 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, from, throwError } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
-
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -20,8 +19,11 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
 
-    // 🚫 NO interceptar el endpoint de token
     if (req.url.includes('/auth/token')) {
+      return next.handle(req);
+    }
+
+    if (!req.url.startsWith(environment.apiUrl)) {
       return next.handle(req);
     }
 
@@ -33,12 +35,6 @@ export class AuthInterceptor implements HttpInterceptor {
           },
         });
         return next.handle(authReq);
-      }),
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          this.auth.clearToken();
-        }
-        return throwError(() => error);
       })
     );
   }
